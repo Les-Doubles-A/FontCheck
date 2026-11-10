@@ -1,0 +1,563 @@
+:root {
+  --bg: #f4efe6;
+  --paper: #fffdfa;
+  --ink: #20201e;
+  --muted: #75716b;
+  --line: #d9d2c7;
+  --accent: #e95c43;
+  --accent-hover: #d34b33;
+  --lic-inconnu: #75716b;
+  --lic-personnel: #c9463a;
+  --lic-commercial: #2f8f57;
+  --lic-libre: #3a6fc9;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Update Banner --- */
+.update-banner {
+  background: linear-gradient(90deg, #20201e 0%, #2d2b28 100%);
+  color: #fffaf3;
+  border-bottom: 2px solid var(--accent);
+  padding: 9px 22px;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.update-banner[hidden] {
+  display: none !important;
+}
+
+.update-banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.update-badge {
+  background: var(--accent);
+  color: #fff;
+  font-family: "Consolas", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 3px;
+  letter-spacing: 0.6px;
+}
+
+.update-message {
+  flex: 1;
+  color: #f4efe6;
+  font-weight: 500;
+}
+
+.update-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.update-install-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 3px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.update-install-btn:hover {
+  background: var(--accent-hover);
+}
+
+.update-install-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.update-dismiss-btn {
+  background: transparent;
+  color: #9c968d;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 7px;
+  border-radius: 3px;
+}
+
+.update-dismiss-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Main Layout --- */
+.app-shell {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 252px;
+  flex-shrink: 0;
+  background: var(--ink);
+  color: #fffaf3;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 24px 22px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.brand-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: #fffaf3;
+}
+
+.library-stats {
+  margin-top: 30px;
+}
+
+.total-count {
+  font-family: "Consolas", monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #d8d1c8;
+  margin-bottom: 4px;
+  white-space: pre-line;
+}
+
+.eyebrow-muted {
+  font-family: "Consolas", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.8px;
+  color: #9c968d;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-top: 28px;
+}
+
+.license-filters {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: #d8d1c8;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 4px;
+  font-family: "Consolas", monospace;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.filter-btn b {
+  margin-left: auto;
+  font-weight: 400;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-inconnu { background: var(--lic-inconnu); }
+.dot-personnel { background: var(--lic-personnel); }
+.dot-commercial { background: var(--lic-commercial); }
+.dot-libre { background: var(--lic-libre); }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.quote {
+  font-family: "Georgia", serif;
+  font-size: 15px;
+  line-height: 1.38;
+  color: #f2ede4;
+  margin: 0 0 10px;
+}
+
+.quote-author {
+  font-family: "Consolas", monospace;
+  font-size: 10px;
+  color: #9c968d;
+  margin: 0 0 18px;
+}
+
+.version-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: "Consolas", monospace;
+  font-size: 11px;
+  color: #9c968d;
+}
+
+.check-update-btn {
+  background: rgba(255, 255, 255, 0.07);
+  color: #d8d1c8;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-family: "Consolas", monospace;
+  font-size: 10.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.check-update-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* --- Main Content --- */
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 38px 50px 20px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.hero-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hero-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.hero-titles h1 {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.8px;
+  color: var(--ink);
+}
+
+.hero-subtitle {
+  margin: 0;
+  font-family: "Georgia", serif;
+  font-size: 35px;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.refresh-btn {
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.refresh-btn:hover {
+  background: var(--accent);
+}
+
+/* --- Search & Size Toolbar --- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-wrapper {
+  flex: 1;
+}
+
+#searchInput {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 15px;
+  outline: none;
+  user-select: text;
+  transition: border-color 0.15s ease;
+}
+
+#searchInput:focus {
+  border-color: var(--accent);
+}
+
+.size-btn {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid transparent;
+  font-family: "Georgia", serif;
+  font-size: 20px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.size-btn:hover {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Sample Preview Input --- */
+.sample-section {
+  margin-top: 22px;
+}
+
+.sample-label {
+  display: block;
+  font-family: "Consolas", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.sample-input {
+  width: 100%;
+  background: transparent;
+  color: var(--ink);
+  border: none;
+  border-bottom: 1px solid transparent;
+  padding: 4px 0 8px;
+  font-family: "Georgia", serif;
+  font-size: 19px;
+  outline: none;
+  user-select: text;
+}
+
+.sample-input:focus {
+  border-bottom-color: var(--accent);
+}
+
+/* --- Status Line --- */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  font-family: "Consolas", monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.status-toast {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* --- Virtualized Font List --- */
+.viewport {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-top: 1px solid var(--line);
+}
+
+.virtual-spacer {
+  position: relative;
+  width: 100%;
+}
+
+.font-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 105px;
+  padding: 14px 6px 10px 2px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg);
+  will-change: transform;
+}
+
+.font-row:hover {
+  background: rgba(255, 253, 250, 0.55);
+}
+
+.font-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.font-row-name {
+  font-family: "Consolas", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  user-select: text;
+}
+
+.font-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.license-badge {
+  background: transparent;
+  border: 1px solid var(--lic-inconnu);
+  color: var(--lic-inconnu);
+  font-family: "Consolas", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.12s ease;
+}
+
+.license-badge:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.license-badge:active {
+  transform: scale(0.96);
+}
+
+.fav-btn {
+  background: transparent;
+  border: none;
+  font-family: "Consolas", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.fav-btn.active {
+  color: var(--accent);
+}
+
+.fav-btn:hover {
+  color: var(--accent);
+}
+
+.font-row-preview {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ink);
+  line-height: 1.2;
+  padding-bottom: 2px;
+  user-select: text;
+}
+
+.empty-state {
+  padding: 64px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-title {
+  font-family: "Georgia", serif;
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+.empty-sub {
+  font-size: 13px;
+  margin: 0;
+}

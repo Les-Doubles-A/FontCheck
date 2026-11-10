@@ -1,8 +1,18 @@
-# FontCheck
+# FontCheck (Rust Edition)
 
-Application Windows locale qui affiche et filtre les polices installées. Chaque famille est rendue directement avec sa propre police.
+Dépôt GitHub : **https://github.com/Les-Doubles-A/FontCheck**
 
-## Générer l’application `.exe`
+Application Windows native ultra-rapide et légère écrite en **Rust** (`tao` + `wry` / WebView2 + API Windows GDI/Registre) qui affiche, filtre et gère les licences de vos polices installées en temps réel.
+
+## Fonctionnalités
+
+- **Moteur 100 % Rust ultra-optimisé** : Exécutable natif autonome (`LTO fat`, `codegen-units = 1`, `strip = symbols`), démarrage instantané et empreinte mémoire minimale.
+- **Détection exhaustive des polices Windows** : Combine l'API native Win32 GDI (`EnumFontFamiliesExW`) et les clés de registre système (`HKLM`) et utilisateur (`HKCU`).
+- **Rendu virtualisé fluide (60+ FPS)** : Pool fixe de lignes DOM avec rendu direct de chaque police.
+- **Gestion des licences & Favoris** : Catégorisation persistante (`Inconnu`, `Personnel`, `Commercial`, `Libre (OFL)`) et favoris sauvegardés dans `%APPDATA%\FontCheck\`.
+- **Vérification et mise à jour automatique** : Vérifie automatiquement au lancement (et à la demande) si une nouvelle version est disponible sur [GitHub Releases](https://github.com/Les-Doubles-A/FontCheck/releases) et propose de mettre à jour l'application en un clic.
+
+## Compiler l'application `.exe`
 
 Dans PowerShell depuis ce dossier :
 
@@ -10,10 +20,23 @@ Dans PowerShell depuis ce dossier :
 .\build.ps1
 ```
 
-Le fichier final est créé dans `dist\FontCheck.exe`. Le script convertit automatiquement `FontCheck.png` en `FontCheck.ico` et l’utilise pour l’application Windows.
-
-## Lancer sans compiler
+Ou directement avec Cargo :
 
 ```powershell
-C:\Users\Adam_Echalard\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe .\fontcheck.py
+cargo build --release
 ```
+
+Le binaire final optimisé est généré dans `dist\FontCheck.exe` (et `target\release\FontCheck.exe`).
+
+<!-- installeur-release -->
+## Installation
+
+Téléchargez **`FontCheck-Setup-1.0.0.exe`** depuis la [dernière release](https://github.com/Les-Doubles-A/FontCheck/releases/latest), puis lancez-le.
+
+L'installation se fait pour l'utilisateur courant, sans droits administrateur (par défaut dans `%LOCALAPPDATA%\Programs\FontCheck`), avec un raccourci dans le menu Démarrer et une désinstallation depuis les Paramètres Windows.
+
+L'installeur n'est pas signé : si Windows SmartScreen l'affiche, cliquez sur « Informations complémentaires » puis « Exécuter quand même ».
+
+### Recréer l'installeur
+
+Compiler l'application (`cargo build --release`), puis lancer [Inno Setup 6](https://jrsoftware.org/isinfo.php) : `iscc installer\FontCheck.iss`. Le setup est créé dans `installer\Output\`.

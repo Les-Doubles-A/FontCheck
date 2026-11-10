@@ -1,0 +1,20 @@
+# Build artifacts
+/target/
+/build/
+/dist/
+/__pycache__/
+*.spec
+fontcheck-test-*.txt
+*.new.exe
+*.old.exe
+
+# Ajouts : builds, secrets et sorties d'installeur
+installer/Output/
+node_modules/
+.env
+local.properties
+*.log
+.venv/
+.gradle/
+.kotlin/
+.claude/settings.local.json

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4efe6" />
+    <title>FontCheck</title>
+    <link rel="icon" href="/FontCheck.ico" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Bannière de mise à jour (cachée par défaut, affichée si nouvelle version détectée) -->
+    <div class="update-banner" id="updateBanner" hidden>
+      <div class="update-banner-inner">
+        <span class="update-badge">NOUVEAU</span>
+        <span class="update-message" id="updateMessage">
+          Une nouvelle version de FontCheck est disponible !
+        </span>
+        <div class="update-actions">
+          <button class="update-install-btn" id="updateInstallBtn" type="button">
+            Mettre à jour maintenant
+          </button>
+          <button class="update-dismiss-btn" id="updateDismissBtn" type="button" title="Ignorer pour cette session">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="/FontCheck.png" alt="FontCheck" class="brand-logo" width="34" height="34" />
+          <span class="brand-title">FontCheck</span>
+        </div>
+
+        <div class="library-stats">
+          <div class="total-count" id="totalLabel">0 POLICES<br />INSTALLÉES</div>
+          <div class="eyebrow-muted">BIBLIOTHÈQUE LOCALE</div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="eyebrow-muted">FILTRES &amp; LICENCES</div>
+          <nav class="license-filters" id="licenseFilters" aria-label="Filtres de licence">
+            <button type="button" class="filter-btn active" data-filter="toutes">
+              <span>Toutes</span>
+              <b id="count-toutes">0</b>
+            </button>
+            <button type="button" class="filter-btn" data-filter="favoris">
+              <span>★ Favoris</span>
+              <b id="count-favoris">0</b>
+            </button>
+            <button type="button" class="filter-btn" data-filter="inconnu">
+              <span class="dot dot-inconnu"></span>
+              <span>Inconnu</span>
+              <b id="count-inconnu">0</b>
+            </button>
+            <button type="button" class="filter-btn" data-filter="personnel">
+              <span class="dot dot-personnel"></span>
+              <span>Personnel</span>
+              <b id="count-personnel">0</b>
+            </button>
+            <button type="button" class="filter-btn" data-filter="commercial">
+              <span class="dot dot-commercial"></span>
+              <span>Commercial</span>
+              <b id="count-commercial">0</b>
+            </button>
+            <button type="button" class="filter-btn" data-filter="libre">
+              <span class="dot dot-libre"></span>
+              <span>Libre (OFL)</span>
+              <b id="count-libre">0</b>
+            </button>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer">
+          <p class="quote">The details are not the details.<br />They make the design.</p>
+          <p class="quote-author">-- CHARLES EAMES</p>
+          <div class="version-bar">
+            <span id="versionLabel">v1.0.0</span>
+            <button type="button" class="check-update-btn" id="checkUpdateBtn" title="Vérifier les mises à jour sur GitHub">
+              ↻ Vérifier MAJ
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <header class="hero">
+          <div class="hero-left">
+            <img src="/FontCheck.png" alt="" class="hero-logo" width="42" height="42" />
+            <div class="hero-titles">
+              <h1>VOS POLICES,</h1>
+              <p class="hero-subtitle">sans chercher.</p>
+            </div>
+          </div>
+          <button class="refresh-btn" id="refreshBtn" type="button">Actualiser</button>
+        </header>
+
+        <section class="toolbar" aria-label="Recherche et taille">
+          <div class="search-wrapper">
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Rechercher une police… (Ctrl+K)"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+          <button
+            class="size-btn"
+            id="sizeBtn"
+            type="button"
+            title="Changer la taille d'aperçu (21px / 27px / 34px)"
+          >
+            Aa
+          </button>
+        </section>
+
+        <section class="sample-section">
+          <label class="sample-label" for="sampleInput">TEXTE D'APERÇU</label>
+          <input
+            id="sampleInput"
+            class="sample-input"
+            type="text"
+            value="Portez ce vieux whisky au juge blond qui fume."
+            spellcheck="false"
+          />
+        </section>
+
+        <div class="status-bar">
+          <span id="statusLabel">0 police(s) affichée(s)</span>
+          <span class="status-toast" id="statusToast" hidden></span>
+        </div>
+
+        <!-- Conteneur de liste virtualisée haute performance -->
+        <div class="viewport" id="viewport">
+          <div class="virtual-spacer" id="virtualSpacer"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <p class="empty-title">Aucune police correspondante</p>
+            <p class="empty-sub">Modifiez votre recherche ou le filtre de licence.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
